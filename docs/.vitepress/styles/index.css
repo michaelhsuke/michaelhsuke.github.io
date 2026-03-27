@@ -1,0 +1,65 @@
+:root {
+  /* 主题色 */
+  --vp-c-brand-1: #3b82f6;
+  --vp-c-brand-2: #2563eb;
+  --vp-c-brand-3: #1d4ed8;
+  --vp-c-brand-soft: rgba(59, 130, 246, 0.14);
+
+  /* 字体 */
+  --vp-font-family-base: "Inter", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+
+  /* 布局 */
+  --vp-layout-max-width: 1200px;
+  --vp-nav-height: 60px;
+
+  /* 首页 Hero */
+  --hero-name-color: var(--vp-c-text-1);
+  --hero-name-size: 2.5rem;
+  --hero-slogan-color: var(--vp-c-text-2);
+}
+
+/* 全局样式 */
+body {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 内容区域宽度优化 */
+.vp-doc {
+  padding-top: 0 !important;
+}
+
+/* VitePress 侧边栏隐藏 - 首页不需要侧边栏 */
+.vp-layout.is-home .VPSidebar {
+  display: none;
+}
+
+/* 文章卡片过渡效果 */
+a {
+  transition: color 0.25s ease;
+}
+
+/* 图片圆角 */
+.vp-doc img {
+  border-radius: 8px;
+}
+
+/* 代码块圆角 */
+.vp-doc div[class*="language-"] {
+  border-radius: 8px;
+}
+
+/* 自定义首页 Hero 样式 */
+.VPHero {
+  padding-bottom: 48px !important;
+}
+
+.VPHero .name {
+  font-size: var(--hero-name-size) !important;
+  color: var(--hero-name-color) !important;
+}
+
+.VPHero .text {
+  font-size: 1.2rem !important;
+  color: var(--hero-slogan-color) !important;
+}
