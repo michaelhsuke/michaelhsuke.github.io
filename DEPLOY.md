@@ -4,11 +4,68 @@
 
 - **GitHub 仓库**: https://github.com/michaelhsuke/michaelhsuke.github.io
 - **域名**: webook.pub
-- **部署方式**: GitHub Actions → GitHub Pages
+- **部署方式**: Cloudflare Pages（推荐） / GitHub Pages
 
 ---
 
-## 一、首次部署：从零到上线
+## 一、Cloudflare Pages 部署（推荐）
+
+### 1. 连接 GitHub 仓库
+
+1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. 左侧菜单 **Workers & Pages** → **Create application** → **Pages** → **Connect to Git**
+3. 授权 GitHub，选择 `michaelhsuke/michaelhsuke.github.io` 仓库
+
+### 2. 配置构建设置
+
+| 配置项 | 值 |
+|--------|-----|
+| **Production branch** | `main` |
+| **Build command** | `npm install && npm run build` |
+| **Build output directory** | `docs/.vitepress/dist` |
+
+### 3. 环境变量（可选）
+
+在 **Settings → Environment variables** 添加：
+
+| 变量名 | 值 |
+|--------|-----|
+| `NODE_VERSION` | `18` |
+
+### 4. 触发部署
+
+部署方式：
+- **自动触发**：推送代码到 `main` 分支
+- **手动触发**：Deployments → 点击失败的部署 → **Retry deployment**
+- **空提交触发**：`git commit --allow-empty -m "trigger deploy" && git push`
+
+### 5. 绑定自定义域名
+
+1. 进入项目 → **Settings** → **Custom domains**
+2. 添加 `webook.pub`
+3. 在域名 DNS 添加 CNAME 记录指向 `<项目名>.pages.dev`
+
+| 类型 | 名称 | 内容 |
+|------|------|------|
+| CNAME | `@` 或 `webook.pub` | `<项目名>.pages.dev` |
+
+### 6. 常见问题
+
+**问题：`root directory not found` 或 `package.json not found`**
+
+原因：构建分支选错了，远程仓库默认是 `master` 分支
+
+解决：Settings → Builds & deployments → Production branch 改为 `main`
+
+**问题：构建失败**
+
+1. 本地先运行 `npm run build` 验证
+2. 检查 Node.js 版本（需要 18+）
+3. 查看 Cloudflare 构建日志定位错误
+
+---
+
+## 二、GitHub Pages 部署（备选）
 
 ### 1. 生成 Personal Access Token
 
